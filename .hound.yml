@@ -1,0 +1,8 @@
+scss:
+  config_file: .scss-style.yml
+
+eslint:
+  enabled: false
+  
+jshint:
+  enabled: false
