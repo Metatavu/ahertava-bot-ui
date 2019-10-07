@@ -1,10 +1,10 @@
 import * as React from "react";
-import '../styles/typing.css';
+import "../styles/typing.css";
 
 class Typing extends React.Component<any, object> {
-  render() {
+  public render() {
     return (
-      <p className="typing">Kirjoittaa<span>.</span><span>.</span><span>.</span></p>
+      <p className="typing-txt">Kirjoittaa<span>.</span><span>.</span><span>.</span></p>
     );
   }
 }

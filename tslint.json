@@ -1,6 +1,19 @@
 {
-  "extends": [],
+  "extends": "tslint:recommended",
   "defaultSeverity": "warning",
+  "rules": {
+    "max-line-length": {
+      "options": [160]
+    },
+    "import-sources-order": "any",
+    "ordered-imports": false,
+    "object-literal-sort-keys": false,
+    "trailing-comma":false,
+    "interface-name":false,
+    "object-literal-shorthand": false,
+    "eofline": false,
+    "no-empty-interface": false
+  },
   "linterOptions": {
     "exclude": [
       "config/**/*.js",

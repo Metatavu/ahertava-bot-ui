@@ -1,7 +1,14 @@
+@import url('https://fonts.googleapis.com/css?family=Open+Sans');
+
+@import "vars";
+@import "theme";
+
 body {
   margin-top: -100px;
-  background: #fff;
+  background: #{$page-bg};
+  font-family: #{$font-family};
 }
+
 .bot-response-container {
   img {
     cursor: pointer;
