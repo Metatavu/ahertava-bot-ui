@@ -7,7 +7,7 @@ body {
 
 .ui.grid.bot-grid {
   margin-top: 75px;
-  margin-bottom: 0px;
+  margin-bottom: 0;
 }
 
 .user-message-container {
@@ -19,7 +19,7 @@ body {
 }
 
 .user-message {
-  animation-timing-function: 'easeInOutBack';
+  animation-timing-function: "easeInOutBack";
   margin-left: 10px;
   border-radius: 50px;
   color: #{$chat-bubble-user-txt-color};
@@ -38,7 +38,7 @@ body {
 .bot-response {
   display: flex;
   align-items: center;
-  animation-timing-function: 'easeInOutBack';
+  animation-timing-function: "easeInOutBack";
   border-radius: 50px;
   color: #{$chat-bubble-bot-txt-color};
   background: #{$chat-bubble-bot-bg};
@@ -46,12 +46,13 @@ body {
   padding: 26px 36px;
   min-height: 17px;
   margin-left: 35px;
+  
   a {
     color: #{$chat-bubble-bot-link-txt-color};
   }
 
   &::after {
-    content: '';
+    content: "";
     display: block;
     border: 15px solid transparent;
     border-right-color: #{$chat-bubble-bot-bg};
@@ -98,16 +99,16 @@ body {
 .bot-image-container {
   display: flex;
   align-content: center;
+  align-self: center;
   justify-content: center;
   width: 64px;
   height: 64px;
-  align-self: center;
   background: #{$bot-bg};
   border-radius: 50%;
   overflow: hidden;
   margin-left: 5px;
   border: #{$bot-border-thickness} solid #{$bot-border-color};
-  box-shadow: 2px 2px 5px rgba(0,0,0,0.2);
+  box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.2);
 
   img {
     width: 100%;
@@ -163,9 +164,7 @@ body {
       color: #{$chat-suggestion-txt-active-color};
       background-color: #{$chat-suggestion-bg-active};
     }
-    
   }
-
 }
 
 .view-wrapper {
@@ -177,9 +176,8 @@ body {
   height: calc(100vh - 75px - #{$message-input-height});
   overflow-y: scroll;
   margin-bottom: 20px;
- 
+  
   .message-list {
     position: relative;
   }
-  
 }

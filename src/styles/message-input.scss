@@ -60,12 +60,12 @@
   transition: color 0.2s ease-out;
 
   &:hover {
-    color:  #{$link-text-hover-color};
+    color: #{$link-text-hover-color};
     text-decoration: underline;
   }
 
   &:active {
-    color:  #{$link-text-active-color};
+    color: #{$link-text-active-color};
   }
 
 }
