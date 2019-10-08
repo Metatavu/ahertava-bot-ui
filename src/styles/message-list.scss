@@ -157,12 +157,12 @@ body {
 
     &:hover {
       color: #{$chat-suggestion-txt-hover-color};
-      background-color:#{$chat-suggestion-bg-hover};
+      background-color: #{$chat-suggestion-bg-hover-color};
     }
 
     &:active {
       color: #{$chat-suggestion-txt-active-color};
-      background-color: #{$chat-suggestion-bg-active};
+      background-color: #{$chat-suggestion-bg-active-color};
     }
   }
 }
@@ -176,7 +176,7 @@ body {
   height: calc(100vh - 75px - #{$message-input-height});
   overflow-y: scroll;
   margin-bottom: 20px;
-  
+
   .message-list {
     position: relative;
   }
