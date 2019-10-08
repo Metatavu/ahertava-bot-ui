@@ -2,28 +2,28 @@ import * as React from "react";
 import * as _ from "lodash";
 import { Button, Grid, Input, InputOnChangeData, Container, Popup, ButtonProps } from "semantic-ui-react";
 
-import 'react-image-lightbox/style.css';
-import '../styles/message-input.css'
+import "react-image-lightbox/style.css";
+import "../styles/message-input.css";
 
 /**
  * Component props
  */
 interface Props {
-  conversationStarted: boolean,
-  waitingForBot: boolean,
-  hint: string,
-  globalQuickResponses: string[],
-  onSendMessage: (messageContent: string) => void,
-  onReset: () => void,
-  onRestartConversation: () => void
+  conversationStarted: boolean;
+  waitingForBot: boolean;
+  hint: string;
+  globalQuickResponses: string[];
+  onSendMessage: (messageContent: string) => void;
+  onReset: () => void;
+  onRestartConversation: () => void;
 }
 
 /**
  * Component state
  */
 interface State {
-  pendingMessage: string
-  globalQuickResponsesMenuOpen: boolean
+  pendingMessage: string;
+  globalQuickResponsesMenuOpen: boolean;
 }
 
 /**
@@ -36,12 +36,12 @@ class MessageInput extends React.Component<Props, State> {
 
   /**
    * Constructor
-   * 
-   * @param props component props 
+   *
+   * @param props component props
    */
   constructor(props: Props) {
     super(props);
-    this.state = { 
+    this.state = {
       pendingMessage: "",
       globalQuickResponsesMenuOpen: false
     };
@@ -53,14 +53,14 @@ class MessageInput extends React.Component<Props, State> {
    * Component did mount life-cycle event
    */
   public componentDidMount() {
-    window.addEventListener('mousedown', this.windownMousedownListener);
+    window.addEventListener("mousedown", this.windownMousedownListener);
   }
-  
+
   /**
    * Component will unmount life-cycle event
    */
   public componentWillUnmount() {
-    window.removeEventListener('mousedown', this.windownMousedownListener);
+    window.removeEventListener("mousedown", this.windownMousedownListener);
   }
 
   /**

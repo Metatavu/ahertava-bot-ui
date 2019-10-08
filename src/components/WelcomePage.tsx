@@ -8,7 +8,7 @@ class WelcomePage extends React.Component<any, any> {
   public render() {
     return (
       <BasicLayout>
-        <Bot storyId="bed51564-655b-46a5-82aa-4d6f8508a536" locale="fi" timeZone="Europe/Helsinki" visitor="From outerspace"/>
+        <Bot storyId={ process.env.REACT_APP_STORY_ID || "" } locale="fi" timeZone="Europe/Helsinki" visitor="From outerspace"/>
       </BasicLayout>
     );
   }

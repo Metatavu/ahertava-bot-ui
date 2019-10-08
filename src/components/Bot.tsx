@@ -74,9 +74,9 @@ class Bot extends React.Component<Props, State> {
           </div>
         ) : (
           <div className="view-wrapper">
-            <MessageList 
+            <MessageList
               waitingForBot={ this.state.waitingForBot }
-              conversationStarted={ this.props.conversationStarted } 
+              conversationStarted={ this.props.conversationStarted }
               messageDatas={ this.props.messageDatas || [] }
               quickResponses={ this.state.quickResponses }
               startConversation={ this.beginConversation }
@@ -89,7 +89,7 @@ class Bot extends React.Component<Props, State> {
               globalQuickResponses={ this.state.globalQuickResponses }
               hint={ this.state.hint || "Sano jotain..." }
               onSendMessage={ this.sendMessage }
-              conversationStarted={ this.props.conversationStarted } 
+              conversationStarted={ this.props.conversationStarted }
               onReset={ this.resetBot }
               onRestartConversation={ this.restartConversation }
             />
@@ -113,11 +113,13 @@ class Bot extends React.Component<Props, State> {
       return;
     }
 
-    this.props.onBotResponse && this.props.onBotResponse(message);
+    if (this.props.onBotResponse) {
+      this.props.onBotResponse(message);
+    }
 
     if (pendingMessages.length > 0) {
       this.setState({
-        waitingForBot: true 
+        waitingForBot: true
       });
     }
 
@@ -126,14 +128,16 @@ class Bot extends React.Component<Props, State> {
     if (pendingMessages.length > 0) {
       await this.waitAsync(wait);
 
-      this.props.onBotResponse && this.props.onBotResponse({
-        id: `temp-${message.id}`,
-        isBot: true,
-        content: ""
-      });
+      if (this.props.onBotResponse) {
+        this.props.onBotResponse({
+          id: `temp-${message.id}`,
+          isBot: true,
+          content: ""
+        });
+      }
     } else {
       this.setState({
-        waitingForBot: false 
+        waitingForBot: false
       });
     }
 
@@ -185,7 +189,7 @@ class Bot extends React.Component<Props, State> {
     }, this.props.storyId);
 
     const initMessage = await Api.getMessagesService(accessToken.access_token).createMessage({
-      content: "INIT",
+      content: this.getInitMessage(),
       sessionId: session.id!
     }, this.props.storyId);
 
@@ -196,6 +200,27 @@ class Bot extends React.Component<Props, State> {
     await this.processBotResponse(initMessage);
     this.props.onAccessTokenUpdate(accessToken);
     return session;
+  }
+  /**
+   * Returns an init message
+   *
+   * @returns an init message
+   */
+  private getInitMessage = () => {
+    const params = {};
+
+    if (window.location.search) {
+      window.location.search.substring(1).split("&").forEach((param) => {
+        const split = param.split("=");
+        if (split && split.length === 2) {
+          params[split[0]] = decodeURIComponent(split[1]);
+        }
+      });
+    }
+
+    const initParam = params["init-params"];
+
+    return "INIT" + (initParam ? ` ${initParam}` : "");
   }
 
   /**
@@ -222,15 +247,17 @@ class Bot extends React.Component<Props, State> {
 
   /**
    * Processes bot response
-   * 
+   *
    * @param message Message with bot response
    */
   private async processBotResponse(message: Message) {
-    this.props.onBotResponse && this.props.onBotResponse({
-      id: `${message.id}-message`,
-      isBot: false,
-      content: message.content || ""
-    });
+    if (this.props.onBotResponse) {
+      this.props.onBotResponse({
+        id: `${message.id}-message`,
+        isBot: false,
+        content: message.content || ""
+      });
+    }
 
     this.setState({
       quickResponses: message.quickResponses || [],
@@ -253,7 +280,10 @@ class Bot extends React.Component<Props, State> {
         pendingMessages: pendingMessages
       });
 
-      this.props.onBotInterrupt && this.props.onBotInterrupt();
+      if (this.props.onBotInterrupt) {
+        this.props.onBotInterrupt();
+      }
+
       this.messageQueueProgress();
     }
   }
@@ -267,11 +297,15 @@ class Bot extends React.Component<Props, State> {
   }
 
   private beginConversation = () => {
-    this.props.startConversation && this.props.startConversation();
+    if (this.props.startConversation) {
+      this.props.startConversation();
+    }
   }
 
   private resetBot = () => {
-    this.props.onBotReset && this.props.onBotReset();
+    if (this.props.onBotReset) {
+      this.props.onBotReset();
+    }
   }
 
   private restartConversation = () => {
@@ -280,7 +314,7 @@ class Bot extends React.Component<Props, State> {
 
   private onWaitingForBotChange = (waitingForBot: boolean) => {
     this.setState({
-      waitingForBot: waitingForBot 
+      waitingForBot: waitingForBot
     });
   }
 }

@@ -29,7 +29,7 @@ export interface AccessTokenUpdate {
   accessToken: AccessToken;
 }
 
-export type BotAction = BotConnected | BotResponse | ConversationStart | BotReset | BotInterrupted | AccessTokenUpdate
+export type BotAction = BotConnected | BotResponse | ConversationStart | BotReset | BotInterrupted | AccessTokenUpdate;
 
 export function accessTokenUpdate(accessToken: AccessToken): AccessTokenUpdate {
   return {

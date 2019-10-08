@@ -10,11 +10,11 @@ export function processAction(state: StoreState, action: BotAction): StoreState 
     case BOT_RESPONSE:
       return { ...state, messageDatas: state.messageDatas.filter((messageData) => !messageData.id.startsWith("temp")).concat([action.messageData])};
     case BOT_INTERRUPTED:
-      return { ...state, messageDatas: state.messageDatas.filter((messageData) => !messageData.id.startsWith("temp"))}
+      return { ...state, messageDatas: state.messageDatas.filter((messageData) => !messageData.id.startsWith("temp"))};
     case CONVERSATION_START:
       return { ...state, conversationStarted: true};
     case BOT_RESET:
-      return {...state, session: undefined, messageDatas: [], conversationStarted: false}
+      return {...state, session: undefined, messageDatas: [], conversationStarted: false };
     case ACCESS_TOKEN_UPDATE:
       const accessToken = action.accessToken;
       return {...state, accessToken: accessToken };

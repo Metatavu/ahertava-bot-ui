@@ -1,6 +1,4 @@
-import LocalizedStrings, { 
-  LocalizedStringsMethods
-} from 'localized-strings';
+import LocalizedStrings, { LocalizedStringsMethods } from "localized-strings";
 
 export interface LocaleStrings extends LocalizedStringsMethods {
 

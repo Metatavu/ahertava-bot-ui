@@ -3,7 +3,7 @@ import * as _ from "lodash";
 import Typing from "./Typing";
 import Lightbox from "react-image-lightbox";
 import { Button, Grid, InputOnChangeData, Transition } from "semantic-ui-react";
-import { emojify } from "node-emoji"; 
+import { emojify } from "node-emoji";
 import "react-image-lightbox/style.css";
 import { MessageData } from "../types";
 import "../styles/message-list.css";
@@ -161,7 +161,7 @@ class MessageList extends React.Component<Props, State> {
         return (
           <Grid.Row style={{paddingTop: "3px", paddingBottom: "3px"}} key={messageData.id} verticalAlign="middle" textAlign="left" columns="equal">
             <Grid.Column className="bot-response-container" onClick={this.handleResponseClick} style={{color: "#fff"}}>
-              { messageData.content ? 
+              { messageData.content ?
               <Transition transitionOnMount={true} visible={true} animation="pulse" duration={200}>
                 <div className="bot-response-row">
                   <div className="bot-image-container">
@@ -187,20 +187,22 @@ class MessageList extends React.Component<Props, State> {
           </Grid.Row>
         );
       } else {
-        return(
+        const messageVisible = messageData.content && !messageData.content.startsWith("INIT");
+
+        return (
           <Grid.Row style={{paddingTop: "25px", paddingBottom: "25px"}} key={messageData.id} verticalAlign="middle" textAlign="right" columns="equal">
             <Grid.Column mobile={2} width={4} floated="left" />
             <Grid.Column className="user-message-container" floated="right">
-            { messageData.content !== "INIT" ? (<div className="user-message" dangerouslySetInnerHTML={{__html: messageData.content}} />) : ""}
+            { messageVisible ? (<div className="user-message" dangerouslySetInnerHTML={{__html: messageData.content}} />) : ""}
             </Grid.Column>
           </Grid.Row>
-        )
+        );
       }
     });
 
     const quickReplyItems = this.props.quickResponses.map((quickReply: string) => {
       return (
-        <Button disabled={this.props.waitingForBot} className="quick-reply-item" key={quickReply} 
+        <Button disabled={this.props.waitingForBot} className="quick-reply-item" key={quickReply}
         onClick={() => {this.sendQuickReply(quickReply); }} >{quickReply}</Button>
       );
     });
